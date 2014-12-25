@@ -1,0 +1,8 @@
+formatter.name: pretty
+
+suites:
+    php_linter_suite:
+        namespace: Bound1ess\PhpLinter
+        src_path: src
+        spec_path: .
+        spec_prefix: spec
