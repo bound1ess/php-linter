@@ -1,0 +1,8 @@
+{
+    "name": "bound1ess/php-linter",
+    "description": "Simple PHP code linter using \"php -l\" command.",
+    "license": "MIT",
+    "require-dev": {
+        "phpspec/phpspec": "~2.0"
+    }
+}
