@@ -9,4 +9,11 @@ class LinterSpec extends ObjectBehavior {
         $this->shouldHaveType('Bound1ess\PhpLinter\Linter');
     }
 
+	function it_checks_given_file_for_potential_errors()
+	{
+		$this->lint(getcwd().'/invalid.php')->shouldReturn([
+			// Should return WHAT?
+		]);
+	}
+
 }
