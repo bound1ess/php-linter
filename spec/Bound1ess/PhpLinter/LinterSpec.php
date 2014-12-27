@@ -17,7 +17,7 @@ class LinterSpec extends ObjectBehavior {
 
 	function it_checks_given_file_for_potential_errors(Cmd $cmd)
 	{
-		$file = getcwd().'/invalid.php';	
+		$file = getcwd().'/errors/parse.php';	
 
 		$cmd->run(
 			"php --syntax-check \"{$file}\""
@@ -35,6 +35,15 @@ class LinterSpec extends ObjectBehavior {
 				'line'    => 3,
 			],
 		]);
+	}
+
+	function it_also_handles_fatal_errors(Cmd $cmd)
+	{
+		// $file = getcwd().'/errors/fatal.php';
+
+		// $cmd->run(...)->willReturn(...);
+
+		// $this->lint($file)->shouldReturn(...);
 	}
 
 }

@@ -1,6 +1,4 @@
-<?php
-
-echo if foreach
+<?php 
 
 function foo() {}
 function foo() {}
