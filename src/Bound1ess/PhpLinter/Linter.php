@@ -72,9 +72,19 @@ class Linter {
 			{
 				continue;
 			}
+
+			$message = '';
+			preg_match('/error: (.+) in (.+) on line/', $error, $message);
 	
 			$result[] = [
-				'type' => (strpos($error, 'PHP Parse error:') !== false ? 'parse' : 'fatal'),
+				'type'    => strpos($error, 'PHP Parse error:') !== false ? 'parse' : 'fatal',
+				'error'   => 
+					$type = (strpos($error, 'syntax error') !== false ? 'syntax' : 'fatal'), 
+				'message' => 
+					trim($type == 'syntax' ? 
+						str_replace('syntax error,', '', $message[1]) : $message[1]
+					),
+				'line'    => intval(end(explode(' ', $error))),
 			];
 		}
 
