@@ -1,3 +1,6 @@
 <?php
 
-// What should be here?
+echo if foreach
+
+function foo() {}
+function foo() {}
