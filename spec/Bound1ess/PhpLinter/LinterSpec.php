@@ -22,10 +22,18 @@ class LinterSpec extends ObjectBehavior {
 		$cmd->run(
 			"php --syntax-check \"{$file}\""
 		.' --no-php-ini --define display_errors=On --define log_errors=Off'
-		)->shouldBeCalled();
+		)->willReturn(
+			"PHP Parse error:  syntax error, unexpected 'if' (T_IF) in invalid.php on line 3"
+			."\nErrors parsing $file\n"
+		);
 
 		$this->lint($file)->shouldReturn([
-			// Should return WHAT?
+			[
+				'type'    => 'parse',
+				'error'   => 'syntax',
+				'message' => "unexpected 'if' (T_IF)",
+				'line'    => 3,
+			],
 		]);
 	}
 

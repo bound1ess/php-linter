@@ -27,7 +27,12 @@ class Linter {
 			'log_errors' => false,
 		]);
 
-		// What should I do with the $output?
+		if (strpos($output, 'Errors parsing') === false)
+		{
+			return [];
+		}
+
+		return $this->parseOutput($output);
 	}
 
 	/**
@@ -51,6 +56,29 @@ class Linter {
 		}
 
 		return $this->cmd->run($command);
+	}
+
+	/**
+	 * @param string $output
+	 * @return array
+	 */
+	protected function parseOutput($output)
+	{
+		$result = [];
+
+		foreach (array_filter(explode(PHP_EOL, $output)) as $error)
+		{
+			if (strpos($error, 'Errors parsing') !== false)
+			{
+				continue;
+			}
+	
+			$result[] = [
+				'type' => (strpos($error, 'PHP Parse error:') !== false ? 'parse' : 'fatal'),
+			];
+		}
+
+		return $result;
 	}
 
 }
