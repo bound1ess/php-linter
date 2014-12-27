@@ -3,6 +3,20 @@
 class Linter {
 
 	/**
+	 * @var Support\Cmd
+	 */
+	protected $cmd;
+
+	/**
+	 * @param Support\Cmd $cmd
+	 * @return Linter
+	 */
+	public function __construct(Support\Cmd $cmd)
+	{
+		$this->cmd = $cmd;
+	}
+
+	/**
 	 * @param string $file
 	 * @return array
 	 */
@@ -24,7 +38,19 @@ class Linter {
 	 */
 	protected function runLinter($file, array $options = [], $usePhpIni = false)
 	{
-		// What should be here?
+		$command = "php --syntax-check \"{$file}\"";
+
+		if ( ! $usePhpIni)
+		{
+			$command .= ' --no-php-ini';
+		}
+
+		foreach ($options as $key => $value)
+		{
+			$command .= sprintf(' --define %s=%s', $key, $value ? 'On' : 'Off'); 
+		}
+
+		return $this->cmd->run($command);
 	}
 
 }
