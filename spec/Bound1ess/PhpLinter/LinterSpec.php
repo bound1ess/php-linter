@@ -10,10 +10,10 @@ class LinterSpec extends ObjectBehavior {
 		$this->beConstructedWith($cmd);
 	}
 
-    function it_is_initializable()
-    {
-        $this->shouldHaveType('Bound1ess\PhpLinter\Linter');
-    }
+	function it_is_initializable()
+	{
+		$this->shouldHaveType('Bound1ess\PhpLinter\Linter');
+	}
 
 	function it_checks_given_file_for_potential_errors(Cmd $cmd)
 	{
@@ -21,7 +21,7 @@ class LinterSpec extends ObjectBehavior {
 
 		$cmd->run(
 			"php --syntax-check \"{$file}\""
-			.' --no-php-ini --define display_errors=On --define log_errors=Off'
+		.' --no-php-ini --define display_errors=On --define log_errors=Off'
 		)->shouldBeCalled();
 
 		$this->lint($file)->shouldReturn([
