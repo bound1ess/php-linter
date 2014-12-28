@@ -24,7 +24,7 @@ class Linter {
 	{
 		$output = $this->runLinter($file, [
 			'display_errors' => true,
-			'log_errors' => false,
+			'log_errors'     => false,
 		]);
 
 		if (strpos($output, 'Errors parsing') === false)
@@ -73,18 +73,19 @@ class Linter {
 				continue;
 			}
 
-			$message = '';
-			preg_match('/error: (.+) in (.+) on line/', $error, $message);
+			$message = [];
+
+			preg_match(
+				'/PHP (?<type>\w+) error: (?<error>.+) in (?<file>.+) on line (?<line>\d+)/', 
+				$error, 
+				$message
+			);
 
 			$result[] = [
-				'type'    => strpos($error, 'PHP Parse error:') !== false ? 'parse' : 'fatal',
-				'error'   => 
-					$type = (strpos($error, 'syntax error') !== false ? 'syntax' : 'fatal'), 
-				'message' => 
-					trim($type == 'syntax' ? 
-						str_replace('syntax error,', '', $message[1]) : $message[1]
-					),
-				'line'    => intval(end(explode(' ', $error))),
+				'type'  => strtolower($message['type']),
+				'error' => trim($message['error']),
+				'file'  => $message['file'],
+				'line'  => intval($message['line']),
 			];
 		}
 

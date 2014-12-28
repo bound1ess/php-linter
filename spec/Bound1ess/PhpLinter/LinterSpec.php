@@ -23,16 +23,16 @@ class LinterSpec extends ObjectBehavior {
 			"php --syntax-check \"{$file}\""
 			.' --no-php-ini --define display_errors=On --define log_errors=Off'
 		)->willReturn(
-			"PHP Parse error:  syntax error, unexpected 'if' (T_IF) in example.php on line 3"
+			"PHP Parse error:  syntax error, unexpected 'if' (T_IF) in {$file} on line 3"
 			."\nErrors parsing {$file}\n"
 		);
 
 		$this->lint($file)->shouldReturn([
 			[
-				'type'    => 'parse',
-				'error'   => 'syntax',
-				'message' => "unexpected 'if' (T_IF)",
-				'line'    => 3,
+				'type'  => 'parse',
+				'error' => "syntax error, unexpected 'if' (T_IF)",
+				'file'  => $file,
+				'line'  => 3,
 			],
 		]);
 	}
@@ -47,16 +47,15 @@ class LinterSpec extends ObjectBehavior {
 		)->willReturn(
 			'PHP Fatal error:  '
 			.($message = "Cannot redeclare foo() (previously declared in {$file}:3)")
-			.' in example.php on line 4'
-			."\nErrors parsing {$file}\n"
+			." in {$file} on line 4\nErrors parsing {$file}\n"
 		);
 
 		$this->lint($file)->shouldReturn([
 			[
-				'type'    => 'fatal',
-				'error'   => 'fatal',
-				'message' => $message,
-				'line'    => 4,
+				'type'  => 'fatal',
+				'error' => $message,
+				'file'  => $file,
+				'line'  => 4,
 			],
 		]);
 	}
