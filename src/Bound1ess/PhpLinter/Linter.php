@@ -26,8 +26,8 @@ class Linter {
 			'display_errors' => true,
 			'log_errors'     => false,
 		]);
-
-		if (strpos($output, 'Errors parsing') === false)
+	
+		if (strpos($output, 'No syntax errors detected') !== false)
 		{
 			return [];
 		}
@@ -88,7 +88,7 @@ class Linter {
 				'line'  => intval($message['line']),
 			];
 		}
-
+		
 		return $result;
 	}
 

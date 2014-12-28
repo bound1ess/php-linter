@@ -42,7 +42,7 @@ class LintCommand extends Command {
 
 		$output->writeln("<info>Checking {$file} for potential errors...</info>");
 
-		if ( ! $errors = $this->linter->lint($file))
+		if (count($errors = $this->linter->lint($file)) == 0)
 		{
 			$output->writeln('No syntax errors were detected.');
 
@@ -52,7 +52,7 @@ class LintCommand extends Command {
 		foreach ($errors as $error)
 		{
 			$output->writeln(sprintf(
-				'<error>[%s]</error>[%s:%s] <comment>%s</comment>',
+				'<error>%s</error> @[%s:%s] <comment>%s</comment>',
 				strtoupper($error['type']), $error['file'], $error['line'], $error['error']
 			));	
 		}
