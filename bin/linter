@@ -1,0 +1,13 @@
+#!/usr/bin/env php
+<?php
+
+# I suppose that you run "bin/linter" or "vendor/bin/linter", not "linter".
+# TODO: do something about that.
+require getcwd().'/vendor/autoload.php';
+
+$linter = new Symfony\Component\Console\Application('Linter', 'dev');
+
+# TODO: $linter->add(new Bound1ess\PhpLinter\Commands\SomeCommand);
+
+exit ($linter->run());
+# vim: syntax=php
