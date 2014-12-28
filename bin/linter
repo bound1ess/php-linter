@@ -7,7 +7,7 @@ require getcwd().'/vendor/autoload.php';
 
 $linter = new Symfony\Component\Console\Application('Linter', 'dev');
 
-# TODO: $linter->add(new Bound1ess\PhpLinter\Commands\SomeCommand);
+$linter->add(new Bound1ess\PhpLinter\Commands\LintCommand);
 
 exit ($linter->run());
 # vim: syntax=php
