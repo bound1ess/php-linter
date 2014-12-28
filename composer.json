@@ -1,6 +1,7 @@
 {
     "name": "bound1ess/php-linter",
     "description": "Simple PHP code linter using \"php -l\" command.",
+	"keywords": ["code", "linter", "lint", "syntax", "check"],
     "license": "MIT",
 	"bin": ["bin/linter"],
     "require-dev": {
