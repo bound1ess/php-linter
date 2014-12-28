@@ -75,7 +75,7 @@ class Linter {
 
 			$message = '';
 			preg_match('/error: (.+) in (.+) on line/', $error, $message);
-	
+
 			$result[] = [
 				'type'    => strpos($error, 'PHP Parse error:') !== false ? 'parse' : 'fatal',
 				'error'   => 

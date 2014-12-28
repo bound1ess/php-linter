@@ -23,7 +23,7 @@ class LinterSpec extends ObjectBehavior {
 			"php --syntax-check \"{$file}\""
 			.' --no-php-ini --define display_errors=On --define log_errors=Off'
 		)->willReturn(
-			"PHP Parse error:  syntax error, unexpected 'if' (T_IF) in invalid.php on line 3"
+			"PHP Parse error:  syntax error, unexpected 'if' (T_IF) in example.php on line 3"
 			."\nErrors parsing {$file}\n"
 		);
 
@@ -45,7 +45,9 @@ class LinterSpec extends ObjectBehavior {
 			"php --syntax-check \"{$file}\""
 			.' --no-php-ini --define display_errors=On --define log_errors=Off'
 		)->willReturn(
-			($message = "Cannot redeclare foo() (previously declared in {$file}:3)")
+			'PHP Fatal error:  '
+			.($message = "Cannot redeclare foo() (previously declared in {$file}:3)")
+			.' in example.php on line 4'
 			."\nErrors parsing {$file}\n"
 		);
 
